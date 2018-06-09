@@ -3,6 +3,7 @@
  */
 
 var fs = require('fs');
+var path = require('path');
 var http = require('http');
 var https = require('https');
 var domain = require('domain');
@@ -61,8 +62,8 @@ function setupSocksServer(portMap) {
     });
 
     https.createServer({
-        key: fs.readFileSync('./config/key.pem'),
-        cert: fs.readFileSync('./config/key-cert.pem')
+        key: fs.readFileSync(path.resolve(__dirname, '../config/key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, '../config/key-cert.pem'))
     }, function(req, res) {
         proxyWith(proxy, portMap, 'https', req, res);
     }).listen(443, function(err) {
