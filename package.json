@@ -1,0 +1,14 @@
+{
+  "name": "etcports",
+  "version": "0.0.1",
+  "description": "/etc/ports -> /etc/hosts, but port numbers instead of ip addresses. Map a domain name to any port on your machine.",
+  "main": "src/index.js",
+  "repository": "git@github.com:asleepysamurai/etcports.git",
+  "author": "Balaganesh Damodaran <asleepysamurai@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "http-proxy": "^1.17.0",
+    "socksv5": "^0.0.6"
+  }
+}
