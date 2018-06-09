@@ -25,7 +25,7 @@ function getPortMapping(next) {
                 var port = parts[0];
                 var domain = parts[1];
 
-                if (!isNaN(parseInt(port)) && !!domain)
+                if (!isNaN(parseInt(port)) && !!domain && port != 443 && port != 80)
                     portMap[domain] = port;
             }
         });
