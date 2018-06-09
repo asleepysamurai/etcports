@@ -62,8 +62,8 @@ function setupSocksServer(portMap) {
     });
 
     https.createServer({
-        key: fs.readFileSync(path.resolve(__dirname, '../config/key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, '../config/key-cert.pem'))
+        key: fs.readFileSync(path.resolve(__dirname, './config/key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, './config/key-cert.pem'))
     }, function(req, res) {
         proxyWith(proxy, portMap, 'https', req, res);
     }).listen(443, function(err) {
