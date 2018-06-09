@@ -54,12 +54,21 @@ function setupSocksServer(portMap) {
     http.createServer(function(req, res) {
         proxyWith(proxy, portMap, 'http', req, res);
     }).listen(80, function(err) {
+        if (err)
+            throw err;
+
         console.log('etcports listening on 80');
     });
 
-    https.createServer(function(req, res) {
+    https.createServer({
+        key: fs.readFileSync('./config/key.pem'),
+        cert: fs.readFileSync('./config/key-cert.pem')
+    }, function(req, res) {
         proxyWith(proxy, portMap, 'https', req, res);
     }).listen(443, function(err) {
+        if (err)
+            throw err;
+
         console.log('etcports listening on 443');
     });
 };
@@ -69,7 +78,7 @@ function init() {
 
     appDomain.on('error', function(err) {
         if (err.code === 'EACCES')
-            return console.log('You have to run as super user to bind on port 80 for etcports functionality to work.');
+            return console.log('You have to run as super user to bind on port 80/443 for etcports functionality to work.');
 
         throw err;
     });
