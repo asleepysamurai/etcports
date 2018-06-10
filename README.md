@@ -1,7 +1,7 @@
 # etcports
 /etc/hosts, but port numbers instead of IP addresses. Map a domain name to any port on your machine.
 
-etcports starts a proxy server, listening on ports 80 and 443 and proxies all requests through to the port mapping specified in /etc/ports file.
+etcports starts a http proxy server, listening on ports 80 and 443 and proxies all requests through to the port mapping specified in */etc/ports* file.
 
 ## Installation
 
@@ -33,9 +33,9 @@ npm install -g etcports
 ```
 
 ##### Note
-You can bind the same port to different domains, but you can only map one domain to one port. If a domain is mapped to multiple ports, the mapping that appears lower most in */etc/ports* is used. In the example above, both *remoteserver.com* and *apiserver* are bound to port 7015.
+You can bind the same port to different domains, but you can only map one domain to one port. If a domain is mapped to multiple ports, the mapping that appears lower most in */etc/ports* is used. In the example above, both *remoteserver.com* and *apiserver* are bound to port *7015*.
 
-Also note that any bindings for ports 80 and 443 are ignored.
+Also note that any bindings for ports *80* and *443* are ignored.
 
 3. Once you've got the config done, start etcports:
 ```
