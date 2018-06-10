@@ -7,6 +7,8 @@ etcports starts a http proxy server, listening on ports 80 and 443 and proxies a
 
 ## Installation
 
+***Important:** Node >= 0.10.0 required.*
+
 #### Yarn
 ```
 yarn global add etcports
