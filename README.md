@@ -1,6 +1,8 @@
 # etcports
 /etc/hosts, but port numbers instead of IP addresses. Map a domain name to any port on your machine.
 
+Basically, use *http[s]://my.api.server* instead of *http[s]://localhost:5499*.
+
 etcports starts a http proxy server, listening on ports 80 and 443 and proxies all requests through to the port mapping specified in */etc/ports* file.
 
 ## Installation
