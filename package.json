@@ -1,6 +1,6 @@
 {
   "name": "etcports",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "/etc/ports -> /etc/hosts, but port numbers instead of ip addresses. Map a domain name to any port on your machine.",
   "main": "etcports.js",
   "repository": "git@github.com:asleepysamurai/etcports.git",

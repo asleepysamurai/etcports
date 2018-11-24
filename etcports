@@ -3,7 +3,7 @@
 if [ -f ./pid ]; then
     OLDPID=`cat ./pid`
     OLDPNAME=`ps -p $OLDPID -o command=`
-    if [ "$OLDPNAME" = "node ./etcports.js" ]; then
+    if [ "$OLDPNAME" = "node \"${BASH_SOURCE%/*}/etcports.js\"" ]; then
         kill -9 $OLDPID
         echo "Stopped running etcports:$OLDPID"
     fi
@@ -14,7 +14,7 @@ if [ "$1" = "--stop" ] ; then
     exit 1
 fi
 
-node ./etcports.js &
+node "${BASH_SOURCE%/*}/etcports.js" &
 PID=$!
 echo "Started etcports with PID:$PID"
 echo $PID > ./pid
