@@ -1,9 +1,12 @@
 #!/bin/sh
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+echo ${DIR}
+
 if [ -f ./pid ]; then
     OLDPID=`cat ./pid`
     OLDPNAME=`ps -p $OLDPID -o command=`
-    if [ "$OLDPNAME" = "node \"${BASH_SOURCE%/*}/etcports.js\"" ]; then
+    if [ "$OLDPNAME" = "node \"${DIR}/etcports.js\"" ]; then
         kill -9 $OLDPID
         echo "Stopped running etcports:$OLDPID"
     fi
@@ -14,7 +17,7 @@ if [ "$1" = "--stop" ] ; then
     exit 1
 fi
 
-node "${BASH_SOURCE%/*}/etcports.js" &
+node "${DIR}/etcports.js" &
 PID=$!
 echo "Started etcports with PID:$PID"
 echo $PID > ./pid
