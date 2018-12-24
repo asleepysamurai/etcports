@@ -49,19 +49,14 @@ sudo etcports
 ##### Note
 Super user permissions are required to bind to ports 80 and 443.
 
-5. If you make any changes to ***/etc/ports***, remember to restart etcports
-```
-sudo etcports
-```
-
-4. To stop etcports:
-```
-sudo etcports -s stop
-```
-
-5. To reload the config and restart:
+4. If you make any changes to ***/etc/ports***, remember to restart etcports
 ```
 sudo etcports -s restart
+```
+
+5. To stop etcports:
+```
+sudo etcports -s stop
 ```
 
 That's all folks!
