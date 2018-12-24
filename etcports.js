@@ -7,7 +7,7 @@ var argv = require('minimist')(process.argv.slice(2));
 
 var signal = argv.s || argv.signal || 'start';
 
-var locker = new SingleInstance('bc61d3babbe3cad821b4b9492add01cd3b69835e66d1e213317503ffc1a35f70');
+var locker = new SingleInstance('etcports');
 
 function start() {
     var fs = require('fs');
@@ -110,6 +110,7 @@ function start() {
     };
 
     init();
+    console.log('Started with pid ', process.pid);
 };
 
 function stop(restart, pid) {
@@ -120,8 +121,10 @@ function stop(restart, pid) {
         fork(path.resolve(__dirname, './index.js'), { detached: true });
 
     console.log('etcports stopped listening on ports 80, 443.');
-    if (pid)
+    if (pid) {
+        console.log('Attempting to kill ', pid);
         process.kill(pid);
+    }
     process.exit(0);
 };
 

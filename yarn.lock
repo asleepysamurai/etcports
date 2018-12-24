@@ -52,6 +52,6 @@ rsvp@^3.1.0:
 
 single-instance@asleepysamurai/node-single-instance:
   version "0.0.1"
-  resolved "https://codeload.github.com/asleepysamurai/node-single-instance/tar.gz/33c131c05a587d084c54dbb2be0085e635658407"
+  resolved "https://codeload.github.com/asleepysamurai/node-single-instance/tar.gz/125a93eb0bd7335b515c541e2831e4afec2b76a3"
   dependencies:
     rsvp "^3.1.0"
