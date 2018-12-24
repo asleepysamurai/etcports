@@ -13,6 +13,6 @@
     "single-instance": "asleepysamurai/node-single-instance"
   },
   "bin": {
-    "etcports": "node ./index.js"
+    "etcports": "./index.js"
   }
 }
