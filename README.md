@@ -56,7 +56,12 @@ sudo etcports
 
 4. To stop etcports:
 ```
-sudo etcports --stop
+sudo etcports -s stop
+```
+
+5. To reload the config and restart:
+```
+sudo etcports -s restart
 ```
 
 That's all folks!
