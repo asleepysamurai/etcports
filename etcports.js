@@ -110,7 +110,6 @@ function start() {
     };
 
     init();
-    console.log('Started with pid ', process.pid);
 };
 
 function stop(restart, pid) {
@@ -122,7 +121,6 @@ function stop(restart, pid) {
 
     console.log('etcports stopped listening on ports 80, 443.');
     if (pid) {
-        console.log('Attempting to kill ', pid);
         process.kill(pid);
     }
     process.exit(0);
