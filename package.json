@@ -10,6 +10,7 @@
   "dependencies": {
     "http-proxy": "^1.17.0",
     "minimist": "^1.2.0",
+    "portscanner": "^2.2.0",
     "single-instance": "asleepysamurai/node-single-instance"
   },
   "bin": {

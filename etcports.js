@@ -4,6 +4,7 @@
 
 var SingleInstance = require('single-instance');
 var argv = require('minimist')(process.argv.slice(2));
+var portscanner = require('portscanner');
 
 var signal = argv.s || argv.signal || 'start';
 
@@ -60,29 +61,50 @@ function start() {
     function setupSocksServer(portMap) {
         var proxy = httpProxy.createProxyServer({});
 
-        var httpServer = http.createServer(function(req, res) {
-            proxyWith(proxy, portMap, 'http', req, res);
-        });
-
-        httpServer.listen(80, function(err) {
+        portscanner.checkPortStatus(80, '127.0.0.1', function(err, httpStatus) {
             if (err)
                 throw err;
 
-            console.log('etcports listening on 80');
-        });
+            if (httpStatus == 'open') {
+                console.log('etcports cannot listen on port 80 because it is in use.');
+            } else {
+                var httpServer = http.createServer(function(req, res) {
+                    proxyWith(proxy, portMap, 'http', req, res);
+                });
 
-        var httpsServer = https.createServer({
-            key: fs.readFileSync(path.resolve(__dirname, './config/key.pem')),
-            cert: fs.readFileSync(path.resolve(__dirname, './config/key-cert.pem'))
-        }, function(req, res) {
-            proxyWith(proxy, portMap, 'https', req, res);
-        });
+                httpServer.listen(80, function(err) {
+                    if (err)
+                        throw err;
 
-        httpsServer.listen(443, function(err) {
-            if (err)
-                throw err;
+                    console.log('etcports listening on 80');
+                });
+            }
 
-            console.log('etcports listening on 443');
+            portscanner.checkPortStatus(443, '127.0.0.1', function(err, httpsStatus) {
+                if (err)
+                    throw err;
+
+                if (httpsStatus == 'open') {
+                    console.log('etcports cannot listen on port 443 because it is in use.');
+                } else {
+                    var httpsServer = https.createServer({
+                        key: fs.readFileSync(path.resolve(__dirname, './config/key.pem')),
+                        cert: fs.readFileSync(path.resolve(__dirname, './config/key-cert.pem'))
+                    }, function(req, res) {
+                        proxyWith(proxy, portMap, 'https', req, res);
+                    });
+
+                    httpsServer.listen(443, function(err) {
+                        if (err)
+                            throw err;
+
+                        console.log('etcports listening on 443');
+                    });
+                }
+
+                if (httpStatus == 'open' && httpsStatus == 'open')
+                    process.exit(0);
+            });
         });
     };
 
